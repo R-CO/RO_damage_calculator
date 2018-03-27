@@ -19,9 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="RO_character_states.h" />
-    <ClInclude Include="RO_damage_calculator.h" />
     <ClInclude Include="src\main.h" />
+    <ClInclude Include="src\RO_character_states.h" />
+    <ClInclude Include="src\RO_damage_calculator.h" />
+    <ClInclude Include="src\utility.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />

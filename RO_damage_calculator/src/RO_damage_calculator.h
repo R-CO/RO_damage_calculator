@@ -7,13 +7,23 @@
 #ifndef _RO_DAMAGE_CALCULATOR_H_
 #define _RO_DAMAGE_CALCULATOR_H_
 
+#include "RO_character_states.h"
+
 namespace rco {
 
 class RoDamageCalculator
 {
 public:
-    RoDamageCalculator() {
-        charater_level_ = 175;
+    RoDamageCalculator(RoCharacterStates character_states) 
+        : character_states_(character_states)
+    {
+        charater_level_ = character_states_.level_;
+        str_ = character_states_.str_ + character_states_.str_extra_;
+        agi_ = character_states_.agi_ + character_states_.agi_extra_;
+        vit_ = character_states_.vit_ + character_states_.vit_extra_;
+        int_ = character_states_.int_ + character_states_.int_extra_;
+        dex_ = character_states_.dex_ + character_states_.dex_extra_;
+        luk_ = character_states_.luk_ + character_states_.luk_extra_;
         str_ = 204;
         agi_ = 140;
         vit_ = 120;
@@ -36,7 +46,8 @@ public:
         element_extra_percentage_ = 0;
         size_extra_percentage_    = 0;
         range_extra_percentage_   = 38;
-        skill_extra_percentage_   = 175;
+        cri_extra_percentage_     = 0;
+        skill_extra_percentage_   = 0;
         def_ignored_percentage_   = 100;
 
         size_percentage_               = 100;
@@ -51,12 +62,18 @@ public:
         atk_afterwards_max_  = CalcMaxAfterwardsAtk();
         atk_afterwards_min_  = CalcMinAfterwardsAtk();
 
-        int damage = atk_afterwards_max_ * 
+        int max_damage = (atk_afterwards_max_ + (atk_states_ * 2 + atk_weapon_practiced_))*
             (1 + ToPercentage(range_extra_percentage_)) *
             (1 + ToPercentage(skill_extra_percentage_)) *
-            ((ToPercentage(250) + (str_ * 0.05)) * ToPercentage(175));
+            (8/*(ToPercentage(250) + (str_ * 0.05))*/ * ToPercentage(175));
 
-       damage;
+        int min_damage = (atk_afterwards_min_ + (atk_states_ * 2 + atk_weapon_practiced_))*
+            (1 + ToPercentage(range_extra_percentage_)) *
+            (1 + ToPercentage(skill_extra_percentage_)) *
+            (8/*(ToPercentage(250) + (str_ * 0.05))*/ * ToPercentage(175));
+
+        max_damage = max_damage;
+        min_damage = min_damage;
     }
 
 private:
@@ -156,6 +173,7 @@ private:
     int element_extra_percentage_;
     int size_extra_percentage_;
     int range_extra_percentage_;
+    int cri_extra_percentage_;
     int skill_extra_percentage_;
     int def_ignored_percentage_;
     int weapon_max_upgrade_atk_;
@@ -166,6 +184,13 @@ private:
     int element_afterwards_percentage_;
     int element_discount_percentage_;
 
+    int enemy_minus_def_;
+    int enemy_multiply_def_;
+    int enemy_discount_;
+
+    RoCharacterStates character_states_;
+
+// meta data
     int charater_level_;
     int str_;
     int agi_;
@@ -175,6 +200,8 @@ private:
     int luk_;
 
 // output
+
+
     int atk_states_;
     int atk_afterwards_max_;
     int atk_afterwards_min_;
