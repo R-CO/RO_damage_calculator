@@ -23,6 +23,9 @@ public:
     }
 
 private:
+    int level_;
+    int job_level;
+
     int str_;
     int agi_;
     int vit_;
