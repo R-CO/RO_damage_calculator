@@ -9,6 +9,8 @@
 
 #include "RO_character_states.h"
 
+#include "utility.h"
+
 namespace rco {
 
 class RoDamageCalculator
@@ -24,12 +26,12 @@ public:
         int_ = character_states_.int_ + character_states_.int_extra_;
         dex_ = character_states_.dex_ + character_states_.dex_extra_;
         luk_ = character_states_.luk_ + character_states_.luk_extra_;
-        str_ = 204;
+        /*str_ = 204;
         agi_ = 140;
         vit_ = 120;
         int_ = 65;
         dex_ = 132;
-        luk_ = 68;
+        luk_ = 68;*/
 
         weapon_basic_atk_       = 130;
         weapon_level_           = 4;
@@ -45,9 +47,10 @@ public:
         race_extra_percentage_    = 195;
         element_extra_percentage_ = 0;
         size_extra_percentage_    = 0;
+        boss_extra_percentage_    = 0;
         range_extra_percentage_   = 38;
         cri_extra_percentage_     = 0;
-        skill_extra_percentage_   = 0;
+        skill_extra_percentage_   = 175;
         def_ignored_percentage_   = 100;
 
         size_percentage_               = 100;
@@ -62,15 +65,17 @@ public:
         atk_afterwards_max_  = CalcMaxAfterwardsAtk();
         atk_afterwards_min_  = CalcMinAfterwardsAtk();
 
-        int max_damage = (atk_afterwards_max_ + (atk_states_ * 2 + atk_weapon_practiced_))*
-            (1 + ToPercentage(range_extra_percentage_)) *
-            (1 + ToPercentage(skill_extra_percentage_)) *
-            (8/*(ToPercentage(250) + (str_ * 0.05))*/ * ToPercentage(175));
+        int max_damage = 
+            (atk_afterwards_max_ + (atk_states_ * 2 + atk_weapon_practiced_))*
+            (1 + Utility::IntToPercent(range_extra_percentage_)) *
+            (1 + Utility::IntToPercent(skill_extra_percentage_)) *
+            ((Utility::IntToPercent(250) + (str_ * 0.05)) * Utility::IntToPercent(charater_level_));
 
-        int min_damage = (atk_afterwards_min_ + (atk_states_ * 2 + atk_weapon_practiced_))*
-            (1 + ToPercentage(range_extra_percentage_)) *
-            (1 + ToPercentage(skill_extra_percentage_)) *
-            (8/*(ToPercentage(250) + (str_ * 0.05))*/ * ToPercentage(175));
+        int min_damage = 
+            (atk_afterwards_min_ + (atk_states_ * 2 + atk_weapon_practiced_))*
+            (1 + Utility::IntToPercent(range_extra_percentage_)) *
+            (1 + Utility::IntToPercent(skill_extra_percentage_)) *
+            ((Utility::IntToPercent(250) + (str_ * 0.05)) * Utility::IntToPercent(charater_level_));
 
         max_damage = max_damage;
         min_damage = min_damage;
@@ -88,10 +93,11 @@ private:
     double CalcSpecialEnhancement() {
         double special_enhancement = 0.0;
 
-        special_enhancement = (1 + static_cast<double>(atk_extra_percentage_) / 100) *
-            (1 + static_cast<double>(race_extra_percentage_) / 100) *
-            (1 + static_cast<double>(element_extra_percentage_) / 100) *
-            (1 + static_cast<double>(size_extra_percentage_) / 100);
+        special_enhancement = 
+            (1 + Utility::IntToPercent(atk_extra_percentage_)) *
+            (1 + Utility::IntToPercent(race_extra_percentage_)) *
+            (1 + Utility::IntToPercent(element_extra_percentage_)) *
+            (1 + Utility::IntToPercent(size_extra_percentage_));
 
         return special_enhancement;
     }
@@ -99,7 +105,7 @@ private:
     int CalcMaxAfterwardsAtk() {
         int max_afterwards_atk = 0;
 
-        max_afterwards_atk = static_cast<int>((CalcMaxWeaponValue() * ToPercentage(size_percentage_) + atk_extra_) * CalcSpecialEnhancement());
+        max_afterwards_atk = static_cast<int>((CalcMaxWeaponValue() * Utility::IntToPercent(size_percentage_) + atk_extra_) * CalcSpecialEnhancement());
 
         return max_afterwards_atk;
     }
@@ -107,7 +113,7 @@ private:
     int CalcMinAfterwardsAtk() {
         int min_afterwards_atk = 0;
 
-        min_afterwards_atk = static_cast<int>((CalcMinWeaponValue() * ToPercentage(size_percentage_) + atk_extra_) * CalcSpecialEnhancement());
+        min_afterwards_atk = static_cast<int>((CalcMinWeaponValue() * Utility::IntToPercent(size_percentage_) + atk_extra_) * CalcSpecialEnhancement());
 
         return min_afterwards_atk;
     }
@@ -139,8 +145,8 @@ private:
     int CalcMaxTotalAtkAffectedByElement() {
         int max_total_atk = 0;
 
-        max_total_atk = static_cast<int>((CalcMaxAfterwardsAtk() * (1 - (static_cast<double>(element_discount_percentage_) / 100)) * (static_cast<double>(element_afterwards_percentage_) / 100)) +
-            ((CalcStatesAtk() * 2 + atk_weapon_practiced_) * (static_cast<double>(element_percentage_) / 100)));
+        max_total_atk = static_cast<int>((CalcMaxAfterwardsAtk() * (1 - Utility::IntToPercent(element_discount_percentage_)) * Utility::IntToPercent(element_afterwards_percentage_)) +
+            ((CalcStatesAtk() * 2 + atk_weapon_practiced_) * Utility::IntToPercent(element_percentage_)));
 
         return max_total_atk;
     }
@@ -148,16 +154,11 @@ private:
     int CalcMinTotalAtkAffectedByElement() {
         int min_total_atk = 0;
 
-        min_total_atk = static_cast<int>((CalcMinAfterwardsAtk() * (1 - (static_cast<double>(element_discount_percentage_) / 100)) * (static_cast<double>(element_afterwards_percentage_) / 100)) +
-            ((CalcStatesAtk() * 2 + atk_weapon_practiced_) * (static_cast<double>(element_percentage_) / 100)));
+        min_total_atk = static_cast<int>((CalcMinAfterwardsAtk() * (1 - Utility::IntToPercent(element_discount_percentage_)) * Utility::IntToPercent(element_afterwards_percentage_)) +
+            ((CalcStatesAtk() * 2 + atk_weapon_practiced_) * Utility::IntToPercent(element_percentage_)));
 
         return min_total_atk;
     }
-
-    double ToPercentage(const int percentage) {
-        return static_cast<double>(percentage) / 100.0;
-    }
-
 
 // input
     int weapon_basic_atk_;
@@ -172,6 +173,7 @@ private:
     int race_extra_percentage_;
     int element_extra_percentage_;
     int size_extra_percentage_;
+    int boss_extra_percentage_;
     int range_extra_percentage_;
     int cri_extra_percentage_;
     int skill_extra_percentage_;
@@ -214,4 +216,4 @@ private:
 
 } // end of namespace "rco"
 
-#endif // end of _RO_DAMAGE_CALCULATOR_H_
+#endif // end of define "_RO_DAMAGE_CALCULATOR_H_"
