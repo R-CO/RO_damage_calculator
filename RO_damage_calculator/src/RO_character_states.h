@@ -14,11 +14,6 @@ class RoCharacterStates
     friend class RoDamageCalculator;
 
 public:
-    RoCharacterStates()
-    {
-        // do nothing
-    }
-
     RoCharacterStates(int level = 175, int job_level = 60, 
                       int str = 1, int agi = 1, int vit = 1, int intelligence = 1, int dex = 1, int luk = 1,
                       int str_extra = 0, int agi_extra = 0, int vit_extra = 0, int int_extra = 0, int dex_extra = 0, int luk_extra = 0
@@ -56,4 +51,4 @@ private:
 
 } // end of namespace "rco"
 
-#endif // end of _RO_CHARACTER_STATES_H_
+#endif // end of define "_RO_CHARACTER_STATES_H_"
