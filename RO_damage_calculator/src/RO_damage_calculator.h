@@ -23,6 +23,7 @@ class RoDamageCalculator
     friend class CannonSpear;
     friend class BanishingPoint;
     friend class OverBrand;
+    friend class ExceedBreak;
     
 public:
     RoDamageCalculator(const RoCharacterStates &character_states);
@@ -122,7 +123,7 @@ private:
     int boss_extra_percentage_;
     int range_extra_percentage_;
     int cri_extra_percentage_;
-    int skill_extra_percentage_;
+    std::vector<int> skill_extra_percentage_;
     int def_ignored_percentage_;
     int weapon_max_upgrade_atk_;
     int weapon_min_upgrade_atk_;
@@ -140,6 +141,7 @@ private:
 
 // meta data
     int charater_level_;
+    int job_level_;
     int str_;
     int agi_;
     int vit_;
