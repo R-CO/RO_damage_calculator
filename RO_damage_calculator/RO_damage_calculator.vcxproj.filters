@@ -1,27 +1,78 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="src">
+    <Filter Include="header files">
+      <UniqueIdentifier>{176a066a-a353-4b49-90fd-128e1c13f083}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source files">
+      <UniqueIdentifier>{b48438f4-ce74-46c1-b180-b195c9c0d1cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source files\src">
       <UniqueIdentifier>{b4d618bf-4dbb-4f2e-b3c5-392359df4756}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="header files\src">
+      <UniqueIdentifier>{b485709b-0269-4525-8438-0005a589070d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="header files\src\skill">
+      <UniqueIdentifier>{40c52a7b-69b9-48e6-9afc-0336c7ecf991}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source files\src\skill">
+      <UniqueIdentifier>{32023e19-432e-45eb-889d-564ae3664cb9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
-      <Filter>src</Filter>
+      <Filter>source files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RO_damage_calculator.cpp">
+      <Filter>source files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\skill\RO_banishing_point.cpp">
+      <Filter>source files\src\skill</Filter>
+    </ClCompile>
+    <ClCompile Include="src\skill\RO_cannon_spear.cpp">
+      <Filter>source files\src\skill</Filter>
+    </ClCompile>
+    <ClCompile Include="src\skill\RO_exceed_break.cpp">
+      <Filter>source files\src\skill</Filter>
+    </ClCompile>
+    <ClCompile Include="src\skill\RO_over_brand.cpp">
+      <Filter>source files\src\skill</Filter>
+    </ClCompile>
+    <ClCompile Include="src\skill\RO_skill_list.cpp">
+      <Filter>source files\src\skill</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\main.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\RO_character_states.h">
-      <Filter>src</Filter>
+      <Filter>header files\src</Filter>
     </ClInclude>
     <ClInclude Include="src\RO_damage_calculator.h">
-      <Filter>src</Filter>
+      <Filter>header files\src</Filter>
     </ClInclude>
     <ClInclude Include="src\utility.h">
-      <Filter>src</Filter>
+      <Filter>header files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\skill\RO_banishing_point.h">
+      <Filter>header files\src\skill</Filter>
+    </ClInclude>
+    <ClInclude Include="src\skill\RO_cannon_spear.h">
+      <Filter>header files\src\skill</Filter>
+    </ClInclude>
+    <ClInclude Include="src\skill\RO_exceed_break.h">
+      <Filter>header files\src\skill</Filter>
+    </ClInclude>
+    <ClInclude Include="src\skill\RO_over_brand.h">
+      <Filter>header files\src\skill</Filter>
+    </ClInclude>
+    <ClInclude Include="src\skill\RO_skill_list.h">
+      <Filter>header files\src\skill</Filter>
+    </ClInclude>
+    <ClInclude Include="src\weapon_info.h">
+      <Filter>header files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\character_states.h">
+      <Filter>header files\src</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -9,7 +9,8 @@
 
 #include "utility.h"
 
-#include "RO_character_states.h"
+#include "character_states.h"
+#include "weapon_info.h"
 
 #include "skill/RO_skill_list.h"
 
@@ -26,7 +27,7 @@ class RoDamageCalculator
     friend class ExceedBreak;
     
 public:
-    RoDamageCalculator(const RoCharacterStates &character_states);
+    RoDamageCalculator(const CharacterStates &character_states, const WeaponInfo &weapon_info);
 
 private:
     int CalcStatesAtk() {
@@ -68,9 +69,9 @@ private:
     int CalcMaxWeaponValue() {
         int max_weapon_value = 0;
 
-        max_weapon_value = static_cast<int>(weapon_basic_atk_ +
-            (weapon_basic_atk_ * weapon_level_ * 0.05) +
-            (weapon_basic_atk_ * str_ / 200.0) +
+        max_weapon_value = static_cast<int>(weapon_info_.GetBasicAtk() +
+            (weapon_info_.GetBasicAtk() * weapon_info_.GetLevel() * 0.05) +
+            (weapon_info_.GetBasicAtk() * str_ / 200.0) +
             atk_extra_by_skill_ +
             weapon_max_upgrade_atk_);
 
@@ -80,9 +81,9 @@ private:
     int CalcMinWeaponValue() {
         int min_weapon_value = 0;
 
-        min_weapon_value = static_cast<int>(weapon_basic_atk_ -
-            (weapon_basic_atk_ * weapon_level_ * 0.05) +
-            (weapon_basic_atk_ * str_ / 200.0) +
+        min_weapon_value = static_cast<int>(weapon_info_.GetBasicAtk() -
+            (weapon_info_.GetBasicAtk() * weapon_info_.GetLevel() * 0.05) +
+            (weapon_info_.GetBasicAtk() * str_ / 200.0) +
             atk_extra_by_skill_ +
             weapon_min_upgrade_atk_);
 
@@ -108,10 +109,10 @@ private:
     }
 
 // input
-    int weapon_basic_atk_;
-    int weapon_level_;
-    int weapon_upgrade_level_;
-    int weapon_weight_;
+    //int weapon_info_.basic_atk_;
+    //int weapon_info_.level_;
+    //int weapon_info.upgrade_level_;
+    //int weapon_info_.weight_;
 
     int atk_extra_;
     int atk_extra_by_skill_; // ex: hit enhancement
@@ -137,7 +138,8 @@ private:
     int enemy_multiply_def_;
     int enemy_discount_;
 
-    RoCharacterStates character_states_;
+    CharacterStates character_states_;
+    WeaponInfo      weapon_info_;
 
 // meta data
     int charater_level_;

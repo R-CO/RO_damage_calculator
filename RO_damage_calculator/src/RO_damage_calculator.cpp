@@ -2,8 +2,8 @@
 
 namespace rco {
 
-RoDamageCalculator::RoDamageCalculator(const RoCharacterStates &character_states) 
-        : character_states_(character_states),
+RoDamageCalculator::RoDamageCalculator(const CharacterStates &character_states, const WeaponInfo &weapon_info) 
+        : character_states_(character_states), weapon_info_(weapon_info),
 #if __cplusplus > 199711L
           skill_extra_percentage_(RoSkillNames.size())
 #else
@@ -25,10 +25,10 @@ RoDamageCalculator::RoDamageCalculator(const RoCharacterStates &character_states
     //
     // R-CO with Glorious Spear
     //
-    weapon_basic_atk_       = 130;
-    weapon_level_           = 4;
-    weapon_upgrade_level_   = 14;
-    weapon_weight_          = 0;
+    weapon_info_.SetBasicAtk(130);
+    weapon_info_.SetLevel(4);
+    weapon_info_.SetUpgradeLevel(14);
+    weapon_info_.SetWeight(0);
     weapon_max_upgrade_atk_ = 238;
     weapon_min_upgrade_atk_ = 98;
     
@@ -47,10 +47,10 @@ RoDamageCalculator::RoDamageCalculator(const RoCharacterStates &character_states
     def_ignored_percentage_               = 100;
 
     // R-CO with Hunting Spear
-    /*weapon_basic_atk_       = 180;
-    weapon_level_           = 4;
-    weapon_upgrade_level_   = 12;
-    weapon_weight_          = 420;
+    /*weapon_info_.SetBasicAtk(180);
+    weapon_info_.SetLevel(4);
+    weapon_info.SetUpgradeLevel(12);
+    weapon_info_.SetWeight(420);
     weapon_max_upgrade_atk_ = 196;
     weapon_min_upgrade_atk_ = 84;
     
@@ -71,10 +71,10 @@ RoDamageCalculator::RoDamageCalculator(const RoCharacterStates &character_states
     //
     // ??? with Hunting Spear
     //
-    /*weapon_basic_atk_       = 180;
-    weapon_level_           = 4;
-    weapon_upgrade_level_   = 9;
-    weapon_weight_          = 420;
+    /*weapon_info_.SetBasicAtk(180);
+    weapon_info_.SetLevel(4);
+    weapon_info.SetUpgradeLevel(9);
+    weapon_info_.SetWeight(420);
     weapon_max_upgrade_atk_ = 133;
     weapon_min_upgrade_atk_ = 63;
     

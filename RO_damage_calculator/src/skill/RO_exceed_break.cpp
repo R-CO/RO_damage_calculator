@@ -13,7 +13,7 @@ double rco::ExceedBreak::CalcSkillRatio(const RoDamageCalculator &ro_damage_calc
     double skill_ratio = 0.0;
     skill_ratio =
         (Utility::IntToPercent(50 * skill_level) + Utility::IntToPercent(10 * ro_damage_calculator.job_level_)) +
-        (Utility::IntToPercent(ro_damage_calculator.weapon_weight_ * ro_damage_calculator.weapon_level_) * Utility::IntToPercent(ro_damage_calculator.charater_level_));
+        (Utility::IntToPercent(ro_damage_calculator.weapon_info_.GetWeight() * ro_damage_calculator.weapon_info_.GetLevel()) * Utility::IntToPercent(ro_damage_calculator.charater_level_));
 
     return skill_ratio;
 }

@@ -20,12 +20,24 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\main.h" />
-    <ClInclude Include="src\RO_character_states.h" />
+    <ClInclude Include="src\character_states.h" />
     <ClInclude Include="src\RO_damage_calculator.h" />
+    <ClInclude Include="src\skill\RO_banishing_point.h" />
+    <ClInclude Include="src\skill\RO_cannon_spear.h" />
+    <ClInclude Include="src\skill\RO_exceed_break.h" />
+    <ClInclude Include="src\skill\RO_over_brand.h" />
+    <ClInclude Include="src\skill\RO_skill_list.h" />
     <ClInclude Include="src\utility.h" />
+    <ClInclude Include="src\weapon_info.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\RO_damage_calculator.cpp" />
+    <ClCompile Include="src\skill\RO_banishing_point.cpp" />
+    <ClCompile Include="src\skill\RO_cannon_spear.cpp" />
+    <ClCompile Include="src\skill\RO_exceed_break.cpp" />
+    <ClCompile Include="src\skill\RO_over_brand.cpp" />
+    <ClCompile Include="src\skill\RO_skill_list.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7ED621E9-839E-48F5-ABF6-41073E87B698}</ProjectGuid>
